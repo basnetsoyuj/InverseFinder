@@ -23,11 +23,11 @@ def inverse(matrix):#returns inverse matrix else 0
     adjoint_matrix=[[None for _ in range(0,m+1)]for _ in range(0,m+1)]
     for i in range(1,len(matrix)):
         for j in range(1,len(matrix)):
-            minor=determinant(reducer(matrix,i,j))
-            cofactor=math.pow(-1,i+j)*minor
-            adjoint_matrix[j][i]=cofactor/det
+            minor=determinant(reducer(matrix,i,j))#minor
+            cofactor=math.pow(-1,i+j)*minor#cofactor
+            adjoint_matrix[j][i]=cofactor/det#directly swap[i][j]<-->[j][i] and divide by the determinant
     return adjoint_matrix
-if __name__=="__main__":
+if __name__=="__main__":#for running as script
     m=int(input("Enter the size of row/column of matrix :"))#get size of m*m matrix
     mat=[[None for _ in range(0,m+1)]for _ in range(0,m+1)]#prefill the matrix and make shallow data for initial from [1][1]
     for i in range(1,m+1):#Get the data from user
@@ -36,8 +36,9 @@ if __name__=="__main__":
     inverse_=inverse(mat)
     if inverse_==0:
         print("Sorry the inverse doesn't exist for this matrix")
-    for x in range(1,m+1):
-        print("\t[",end="\t")
-        for y in range(1,m+1):
-            print(inverse_[x][y],end="\t")
-        print("]\t")
+    else:
+        for x in range(1,m+1):
+            print("\t[",end="\t")
+            for y in range(1,m+1):
+                print(inverse_[x][y],end="\t")
+            print("]\t")
