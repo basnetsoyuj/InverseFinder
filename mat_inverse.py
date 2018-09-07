@@ -3,7 +3,7 @@ import copy,math
 def reducer(matrix,i,j):#gets the matrix by removing the (i,j)th element
     matcopy=copy.deepcopy(matrix)
     [matcopy[y].pop(j) for y in range(0,len(matcopy))]
-    matcopy.remove(matcopy[i])
+    matcopy.pop(i)
     return matcopy
 def determinant(matrix):#returns the determinant of the specific matrix
     if len(matrix)==3:
@@ -32,7 +32,14 @@ if __name__=="__main__":#for running as script
     mat=[[None for _ in range(0,m+1)]for _ in range(0,m+1)]#prefill the matrix and make shallow data for initial from [1][1]
     for i in range(1,m+1):#Get the data from user
         for j in range(1,m+1):
-            mat[i][j]=int(input(f"Enter the ({i},{j})th element of matrix :"))
+            data_int=False
+            while not data_int:
+                try:
+                    data=int(input(f"Enter the ({i},{j})th element of matrix :"))
+                    data_int=True
+                except ValueError:
+                    print("Enter a valid integer :")
+            mat[i][j]=data
     inverse_=inverse(mat)
     if inverse_==0:
         print("Sorry the inverse doesn't exist for this matrix")
